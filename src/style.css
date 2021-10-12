@@ -9,3 +9,20 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
+#footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 20px 80px;
+  border-top: 2px solid rgb(112, 160, 163);
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: white;
+  margin-top: 80px;
+}
+
+#logo {
+  height: 40px;
+}
