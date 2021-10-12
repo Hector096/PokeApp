@@ -13,3 +13,11 @@ body {
 #logo {
   height: 60px;
 }
+
+.card {
+  width: 18rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+}
