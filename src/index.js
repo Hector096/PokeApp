@@ -1,6 +1,7 @@
 import './style.css';
 import Logo from '../asset/images/logo.png';
 import getPokemon from './pokemonApiHandler';
+import { displayPokemon } from './utils';
 
 const logoImg = document.getElementById('logoDiv');
 const mainDiv = document.getElementById('mainDiv');
@@ -51,6 +52,12 @@ const createPokemon = (item) => {
   a.innerText = 'Comments';
   div.classList.add('d-flex');
   div.classList.add('flex-column');
+  a.addEventListener('click', async (e) => {
+    const { id } = item;
+    console.log('click');
+    displayPokemon(item);
+  });
+
   div.appendChild(h5);
   div.appendChild(like);
   div.appendChild(a);
