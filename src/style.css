@@ -42,14 +42,14 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60%;
-  height: 100vh;
+  background-color: rgba(12, 10, 10, 0.15);
+  backdrop-filter: blur(8px);
+  width: 75%;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #fff;
   z-index: 999;
-  overflow-y: scroll;
 }
 
 .pokemon-image-wrapper {
@@ -71,6 +71,12 @@ main {
 
 .comment-count {
   margin-right: 7px;
+  font-weight: bold;
+}
+
+.comments-list {
+  height: 150px;
+  overflow-y: scroll;
 }
 
 #pokemon-modal {
@@ -93,6 +99,10 @@ main {
   margin-left: 1rem;
 }
 
+.propWidth {
+  width: 300px;
+}
+
 .comment-date {
   position: absolute;
   top: 0;
@@ -108,8 +118,9 @@ main {
 .pokemon-attr {
   list-style: none;
   display: flex;
-  justify-content: space-around;
-  max-width: 400px;
+  justify-content: space-between;
+  width: 500px;
+  font-weight: bold;
   margin: auto;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
