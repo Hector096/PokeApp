@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { getComment, postComment } from './data';
+import counter from './counter';
 
-const getCount = (comments) => comments.length || 0;
 
 const creatCommentLi = (comment, username, creation_date) => {
   const li = document.createElement('li');
@@ -74,7 +74,7 @@ const commentDisplay = (comments) => {
   commentHeader.classList.add('comment-header');
   const commentCount = document.createElement('span');
   commentCount.classList.add('comment-count');
-  commentCount.innerHTML = getCount(comments);
+  commentCount.innerHTML = counter.comments(comments);
   const image = document.createElement('img');
   image.classList.add('comment-image');
   image.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzRjvGlHeDau_ut4SiozBz-DuieevYUmbeRQ&usqp=CAU';
@@ -145,5 +145,3 @@ export const displayModal = () => {
 export const hideModal = () => {
   document.querySelector('#popupComment').style.display = 'none';
 };
-
-export default getCount;
