@@ -2,7 +2,6 @@
 import { getComment, postComment } from './data';
 import counter from './counter';
 
-
 const creatCommentLi = (comment, username, creation_date) => {
   const li = document.createElement('li');
   const span = document.createElement('span');
@@ -24,7 +23,7 @@ const modalForm = (id) => {
   const wrapper = document.createElement('div');
   const heading = document.createElement('h6');
   heading.textContent = 'Add Comment';
-  heading.classList.add('mb-2', 'pt-3', 'text-center');
+  heading.classList.add('mb-1', 'pt-1', 'text-center');
   wrapper.classList.add('modal-form-wrapper');
   const form = document.createElement('form');
   form.classList.add('comment-form');
@@ -99,10 +98,20 @@ export const displayPokemon = async (pokemon) => {
   cancel.id = 'cancel';
   const popupContainer = document.createElement('div');
   const pokemonImageContainer = document.createElement('div');
+  const pokemonPropContainer = document.createElement('div');
+  pokemonPropContainer.classList.add('d-flex');
+  const pokemonProp = document.createElement('h5');
+  pokemonProp.innerHTML = ('Abilities: ');
+  pokemonProp.classList.add('propWidth', 'text-center');
   const pokemonAbilities = document.createElement('ul');
   pokemonAbilities.classList.add('pokemon-attr');
+  pokemonPropContainer.appendChild(pokemonProp);
+  pokemonPropContainer.appendChild(pokemonAbilities);
   const pokemonImage = document.createElement('img');
   pokemonImage.src = pokemon.sprites.front_default;
+  const pokemonName = document.createElement('h5');
+  pokemonName.innerHTML = pokemon.name.toUpperCase();
+  pokemonName.classList.add('text-center', 'pt-0');
   pokemonImageContainer.appendChild(pokemonImage);
 
   const comments = await getComment(pokemon.id);
@@ -110,6 +119,7 @@ export const displayPokemon = async (pokemon) => {
   pokemon.abilities.forEach(({ ability }) => {
     const li = document.createElement('li');
     li.textContent = ability.name;
+    pokemonProp.appendChild(li);
     pokemonAbilities.appendChild(li);
   });
   pokemonImageContainer.classList.add('pokemon-image-wrapper');
@@ -127,7 +137,8 @@ export const displayPokemon = async (pokemon) => {
   flexWrapper.appendChild(commentDisplay(comments));
 
   popupContainer.appendChild(pokemonImageContainer);
-  popupContainer.appendChild(pokemonAbilities);
+  popupContainer.appendChild(pokemonName);
+  popupContainer.appendChild(pokemonPropContainer);
   popupContainer.appendChild(flexWrapper);
   popup.appendChild(popupContainer);
   popup.appendChild(cancel);

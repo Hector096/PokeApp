@@ -41,7 +41,6 @@ describe('Pokemon Counter function Test', () => {
   });
 });
 
-
 const comments = [
   {
     username: 'Test',
