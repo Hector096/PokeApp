@@ -42,7 +42,7 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80%;
+  width: 60%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -100,8 +100,8 @@ main {
 }
 
 .submit-form-btn {
-  background: #3DE5D6;
-  border-color: #3DE5D6;
+  background: #3de5d6;
+  border-color: #3de5d6;
   box-shadow: 2px 3px 0 0 rgb(0 0 0 / 40%);
 }
 

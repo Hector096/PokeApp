@@ -61,9 +61,7 @@ const createPokemon = (item, likes) => {
   a.innerText = 'Comments';
   div.classList.add('d-flex');
   div.classList.add('flex-column');
-  a.addEventListener('click', async (e) => {
-    const { id } = item;
-    console.log('click');
+  a.addEventListener('click', async () => {
     displayPokemon(item);
   });
 
