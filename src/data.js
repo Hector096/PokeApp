@@ -45,7 +45,8 @@ export const getComment = async (id) => {
     const response = await fetch(`${BASE_URL}/comments?item_id=${id}`)
       .then((response) => response.json())
       .then((json) => json);
-    return response;
+      console.log(response)
+    return response.error ? [] : response;
   } catch (e) {
     throw new Error(`API error! status: ${e.toString()}`);
   }
@@ -61,11 +62,10 @@ export const postComment = async (itemId, username, comment) => {
         comment,
       }),
       headers: {
-        'Content-type': 'application/json; charset=UTF-8',
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
       },
-    })
-      .then((response) => response.json())
-      .then((json) => json);
+    });
     return response;
   } catch (e) {
     throw new Error(`API error! status: ${e.toString()}`);

@@ -1,34 +1,27 @@
+import { getComment, postComment } from "./data";
+
 const getCommentsCount = (comments) => comments.length || 0;
 
-const demoComments = [
-  {
-    username: 'Mike',
-    message: 'Comment 1',
-  },
-  {
-    username: 'Mike',
-    message: 'Comment 2',
-  },
-  {
-    username: 'Mike',
-    message: 'Comment 3',
-  },
-  {
-    username: 'Mike',
-    message: 'Comment 4',
-  },
-];
-
-export const displayPokemon = (pokemon) => {
+export const displayPokemon = async (pokemon) => {
   const popup = document.createElement('div');
   const cancel = document.createElement('span');
   cancel.innerHTML = 'x';
   cancel.id = 'cancel';
   const popupContainer = document.createElement('div');
   const pokemonImageContainer = document.createElement('div');
+  const pokemonAbilities = document.createElement('ul');
+  pokemonAbilities.classList.add('pokemon-attr')
   const pokemonImage = document.createElement('img');
   pokemonImage.src = pokemon.sprites.front_default;
   pokemonImageContainer.appendChild(pokemonImage);
+
+  const comments = await getComment(pokemon.id);
+
+  pokemon.abilities.forEach(({ ability }) => {
+    const li = document.createElement('li');
+    li.textContent = ability.name;
+    pokemonAbilities.appendChild(li);
+  });
   pokemonImageContainer.classList.add('pokemon-image-wrapper');
   popup.classList.add('modal-body');
   popupContainer.classList.add('container-fluid');
@@ -38,9 +31,14 @@ export const displayPokemon = (pokemon) => {
     modal.style.display = 'none';
   });
 
+  const flexWrapper = document.createElement('div');
+  flexWrapper.classList.add('d-flex');
+  flexWrapper.appendChild(modalForm(pokemon.id));
+  flexWrapper.appendChild(commentDisplay(comments));
+
   popupContainer.appendChild(pokemonImageContainer);
-  popupContainer.appendChild(commentDisplay(demoComments));
-  popupContainer.appendChild(modalForm());
+  popupContainer.appendChild(pokemonAbilities);
+  popupContainer.appendChild(flexWrapper);
   popup.appendChild(popupContainer);
   popup.appendChild(cancel);
   const modalDisplay = document.querySelector('#pokemon-modal');
@@ -50,7 +48,7 @@ export const displayPokemon = (pokemon) => {
   modalDisplay.style.display = 'block';
 };
 
-const modalForm = () => {
+const modalForm = (id) => {
   const wrapper = document.createElement('div');
   const heading = document.createElement('h6');
   heading.textContent = 'Add Comment';
@@ -59,6 +57,7 @@ const modalForm = () => {
   heading.classList.add('text-center');
   wrapper.classList.add('modal-form-wrapper');
   const form = document.createElement('form');
+  form.classList.add('comment-form')
   const userNameLabel = document.createElement('label');
   const commentLabel = document.createElement('label');
   userNameLabel.textContent = 'Username: ';
@@ -74,7 +73,16 @@ const modalForm = () => {
   const submit = document.createElement('button');
   submit.type = 'submit';
   submit.textContent = 'Submit';
-  submit.classList.add('btn', 'btn-sm', 'btn-primary', 'mt-4');
+  submit.classList.add('btn', 'btn-sm', 'submit-form-btn', 'mt-4');
+  submit.addEventListener('click', async (e) => {
+    e.preventDefault();
+    await postComment(id, userNameInput.value, commentInput.value);
+    const newComment = creatCommentLi(commentInput.value, userNameInput.value, new Date().toLocaleDateString())
+    document.querySelector('.comments-list').appendChild(newComment);
+    const count = document.querySelector('.comment-count');
+    count.innerHTML = parseInt(count.textContent, 10) + 1;
+    form.reset();
+  })
 
   form.appendChild(heading);
   form.appendChild(userNameLabel);
@@ -100,21 +108,32 @@ const commentDisplay = (comments) => {
   commentHeader.appendChild(commentCount);
   commentHeader.appendChild(image);
   const ul = document.createElement('ul');
-  ul.classList.add('list-group');
-  comments.forEach((comment) => {
-    const li = document.createElement('li');
-    const span = document.createElement('span');
-    li.classList.add('list-group-item', 'position-relative');
-    li.textContent = comment.message;
-    span.innerHTML = comment.username;
-    span.classList.add('coment-author');
-    li.appendChild(span);
+  ul.classList.add('list-group', 'comments-list');
+  comments.forEach(({comment, username, creation_date}) => {
+    const li =creatCommentLi(comment, username, creation_date);
     ul.appendChild(li);
   });
   wrapper.appendChild(commentHeader);
   wrapper.appendChild(ul);
   return wrapper;
 };
+
+const creatCommentLi = (comment, username, creation_date) => {
+  const li = document.createElement('li');
+    const span = document.createElement('span');
+    const commentSpan = document.createElement('span');
+    const dateSpan = document.createElement('span');
+    li.classList.add('list-group-item', 'position-relative', 'pt-3');
+    commentSpan.textContent = comment;
+    span.innerHTML = `${username}: `;
+    dateSpan.innerHTML = creation_date;
+    span.classList.add('comment-author');
+    dateSpan.classList.add('comment-date');
+    li.appendChild(dateSpan);
+    li.appendChild(span);
+    li.appendChild(commentSpan);
+    return li;
+}
 
 export const displayModal = () => {
   document.querySelector('#popupComment').style.display = 'flex';
