@@ -24,9 +24,7 @@ const modalForm = (id) => {
   const wrapper = document.createElement('div');
   const heading = document.createElement('h6');
   heading.textContent = 'Add Comment';
-  heading.classList.add('mb-2');
-  heading.classList.add('pt-3');
-  heading.classList.add('text-center');
+  heading.classList.add('mb-2', 'pt-3', 'text-center');
   wrapper.classList.add('modal-form-wrapper');
   const form = document.createElement('form');
   form.classList.add('comment-form');
