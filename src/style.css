@@ -32,3 +32,84 @@ body {
   display: flex;
   align-items: center;
 }
+
+main {
+  min-height: calc(100vh - 155.5px);
+}
+
+.modal-body {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  z-index: 999;
+  overflow-y: scroll;
+}
+
+.pokemon-image-wrapper {
+  text-align: center;
+}
+
+.pokemon-image-wrapper img {
+  width: 220px;
+}
+
+.comment-image {
+  width: 25px;
+}
+
+.comment-header {
+  padding: 5px 0;
+  text-align: right;
+}
+
+.comment-count {
+  margin-right: 7px;
+}
+
+#pokemon-modal {
+  display: none;
+}
+
+#cancel {
+  position: absolute;
+  right: 20px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.comment-form {
+  width: 40%;
+}
+
+.comment-form + div {
+  flex: 1;
+  margin-left: 1rem;
+}
+
+.comment-date {
+  position: absolute;
+  top: 0;
+  font-size: 12px;
+}
+
+.submit-form-btn {
+  background: #3de5d6;
+  border-color: #3de5d6;
+  box-shadow: 2px 3px 0 0 rgb(0 0 0 / 40%);
+}
+
+.pokemon-attr {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  max-width: 400px;
+  margin: auto;
+  margin-bottom: 3rem;
+}

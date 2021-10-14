@@ -1,5 +1,6 @@
 import './style.css';
 import Logo from '../asset/images/logo.png';
+import { displayPokemon } from './utils';
 import { getPokemon, getLikes, postLike } from './data';
 import involvement from './involvement';
 import counter from './counter';
@@ -60,6 +61,10 @@ const createPokemon = (item, likes) => {
   a.innerText = 'Comments';
   div.classList.add('d-flex');
   div.classList.add('flex-column');
+  a.addEventListener('click', async () => {
+    displayPokemon(item);
+  });
+
   div.appendChild(h5);
   div.appendChild(like);
   div.appendChild(a);
