@@ -75,7 +75,7 @@ main {
 }
 
 .comments-list {
-  height: 150px;
+  max-height: 35vh;
   overflow-y: scroll;
 }
 
