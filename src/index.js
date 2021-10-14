@@ -19,7 +19,7 @@ myFooter.classList.add('align-items-center');
 document.body.appendChild(myFooter);
 const p1 = document.createElement('p');
 const txt1 = document.createTextNode(
-  'Copyright © 2021 Created By Ade & Hector',
+  'Copyright © 2021 Created By Ade & Hector under CC license',
 );
 p1.className += ' text-muted text-center';
 p1.appendChild(txt1);

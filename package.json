@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Hector096/PokeApp#readme",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.15.4",
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.3.0",
     "eslint": "^7.32.0",
