@@ -2,6 +2,15 @@
 import { getComment, postComment } from './data';
 import counter from './counter';
 
+const toaster = (message, classes) => {
+  const toasterDiv = document.querySelector('#toast');
+  toasterDiv.innerHTML = '';
+  toasterDiv.innerHTML = message;
+  toasterDiv.style.background = classes === 'toast--success' ? '#00c02b' : '#d50000';
+  toasterDiv.classList.add(classes);
+  setTimeout(() => toasterDiv.classList.remove(classes), 3000);
+};
+
 const creatCommentLi = (comment, username, creation_date) => {
   const li = document.createElement('li');
   const span = document.createElement('span');
@@ -45,16 +54,33 @@ const modalForm = (id) => {
   submit.classList.add('btn', 'btn-sm', 'submit-form-btn', 'mt-4');
   submit.addEventListener('click', async (e) => {
     e.preventDefault();
-    await postComment(id, userNameInput.value, commentInput.value);
-    const newComment = creatCommentLi(
-      commentInput.value,
-      userNameInput.value,
-      new Date().toLocaleDateString(),
-    );
-    document.querySelector('.comments-list').appendChild(newComment);
-    const count = document.querySelector('.comment-count');
-    count.innerHTML = parseInt(count.textContent, 10) + 1;
-    form.reset();
+    try {
+      if (!userNameInput.value || !commentInput.value) {
+        toaster('Username and Comment required!', 'toast--error');
+        return false;
+      }
+      if (/\d+/.test(userNameInput.value) || /\d+/.test(commentInput.value)) {
+        toaster('Only alphabets allowed!', 'toast--error');
+        return false;
+      }
+      const res = await postComment(id, userNameInput.value, commentInput.value);
+      if (res) {
+        const newComment = creatCommentLi(
+          commentInput.value,
+          userNameInput.value,
+          new Date().toLocaleDateString(),
+        );
+        document.querySelector('.comments-list').appendChild(newComment);
+        const count = document.querySelector('.comment-count');
+        count.innerHTML = parseInt(count.textContent, 10) + 1;
+        toaster('Comment Created successfully!', 'toast--success');
+      } else {
+        toaster('An error ocurred', 'toast--error');
+      }
+    } catch (e) {
+      toaster('An error ocurred', 'toast--error');
+    }
+    return form.reset();
   });
 
   form.appendChild(heading);

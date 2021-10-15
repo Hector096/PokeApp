@@ -124,3 +124,29 @@ main {
   margin: auto;
   margin-bottom: 2rem;
 }
+
+#toast {
+  position: fixed;
+  width: max-content;
+  border-radius: 7px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  font-family: sans-serif;
+  top: 20px;
+  right: -500px;
+  transition: right 0.9s ease-in-out;
+  padding: 10px;
+  z-index: 9999;
+  color: #fff;
+}
+
+#toast.toast--success {
+  background: #00c02b;
+  border-color: #009d23;
+  right: 20px;
+}
+
+#toast.toast--error {
+  background: #d50000;
+  border-color: #ba0000;
+  right: 0;
+}
