@@ -8,7 +8,7 @@ const toaster = (message, classes) => {
   toasterDiv.innerHTML = message;
   toasterDiv.style.background = classes === 'toast--success' ? '#00c02b' : '#d50000';
   toasterDiv.classList.add(classes);
-  setTimeout(() => toasterDiv.classList.remove(classes), 5000);
+  setTimeout(() => toasterDiv.classList.remove(classes), 3000);
 };
 
 const creatCommentLi = (comment, username, creation_date) => {
@@ -73,7 +73,7 @@ const modalForm = (id) => {
         document.querySelector('.comments-list').appendChild(newComment);
         const count = document.querySelector('.comment-count');
         count.innerHTML = parseInt(count.textContent, 10) + 1;
-        toaster('Comment Created successfully', 'toast--success');
+        toaster('Comment Created successfully!', 'toast--success');
       } else {
         toaster('An error ocurred', 'toast--error');
       }

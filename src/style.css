@@ -125,27 +125,12 @@ main {
   margin-bottom: 2rem;
 }
 
-.toast {
-  position: fixed;
-  top: 0;
-  left: 0;
-  margin: auto;
-  max-width: 400px;
-  padding: 6px;
-  background: #ccc;
-  color: #333;
-  font-family: sans-serif;
-  text-align: center;
-  border: 1px solid #aaa;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  visibility: hidden;
-  opacity: 0;
-}
-
 #toast {
   position: fixed;
   width: max-content;
+  border-radius: 7px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  font-family: sans-serif;
   top: 20px;
   right: -500px;
   transition: right 0.9s ease-in-out;
